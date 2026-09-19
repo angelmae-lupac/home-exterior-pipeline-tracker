@@ -4,3 +4,4 @@ node_modules
 .env.local
 .vercel
 dist
+/src/generated/prisma
