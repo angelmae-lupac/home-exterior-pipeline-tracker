@@ -478,6 +478,9 @@ export default function PipelineApp({ initialJobs }) {
     if (metaTheme) metaTheme.setAttribute("content", theme === "dark" ? "#15181B" : "#F6F4EF");
   }, [theme]);
 
+   const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+
   const toggleTheme = () => setTheme((t) => (t === "dark" ? "light" : "dark"));
 
   const openNew = () => {
@@ -558,14 +561,14 @@ export default function PipelineApp({ initialJobs }) {
             <button className={view === "dashboard" ? "active" : ""} onClick={() => setView("dashboard")}>Dashboard</button>
           </div>
           <div className="header-actions-row">
-            <button
+                          <button
               type="button"
               className="theme-toggle"
               onClick={toggleTheme}
-              aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
-              title={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+              aria-label={mounted ? (theme === "dark" ? "Switch to light mode" : "Switch to dark mode") : "Toggle theme"}
+              title={mounted ? (theme === "dark" ? "Switch to light mode" : "Switch to dark mode") : "Toggle theme"}
             >
-              {theme === "dark" ? <SunIcon /> : <MoonIcon />}
+              {mounted ? (theme === "dark" ? <SunIcon /> : <MoonIcon />) : null}
             </button>
             <button className="btn btn-primary" onClick={openNew}>
               <PlusIcon /> Add job
